@@ -1,0 +1,69 @@
+.title{
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #016A91;
+    -fx-transition: all 0.3s ease;
+}
+
+.title:hover{
+    -fx-text-fill: #0A3353;
+}
+
+.form_container{
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+    -fx-transition: all 0.3s ease;
+}
+
+.form_container:hover{
+    -fx-background-color: #DDDDDD;
+}
+
+.form_container Text{
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #888888;
+    -fx-transition: all 0.3s ease;
+}
+
+.form_container Text:hover{
+    -fx-text-fill: #666666;
+}
+
+.form_container VBox{
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: #000000;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.form_container TextField{
+    -fx-pref-height: 250;
+    -fx-pref-height: 30;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 1.3em;
+    -fx-effect: dropshadow( three-pass-box , #AAAAAA , 3, 0, 0, 3);
+    -fx-transition: all 0.3s ease;
+}
+
+.form_container TextField:hover{
+    -fx-background-color: #F5F5F5;
+}
+
+.form_container Button{
+    -fx-background-color: linear-gradient(to right,#0A3353, #016A91);
+    -fx-effect: dropshadow( three-pass-box , #AAAAAA , 3, 0, 0, 3);
+    -fx-pref-width: 100;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Calibri Light";
+    -fx-text-fill: #FFFFFF;
+    -fx-transition: all 0.3s ease;
+}
+
+.form_container Button:hover{
+    -fx-cursor: hand;
+    -fx-background-color: linear-gradient(to right,#016A91, #0A3353);
+}

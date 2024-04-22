@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hemotransfert.hemotransfert.ReportServiceController"
+            stylesheets="@../CSS/Styles.css">
+
+    <VBox spacing="10">
+        <Label text="Reports"/>
+        <Button text="Generate Demandededon Report" onAction="#generateDemandededonReport"/>
+        <Button text="Generate Reservation Report" onAction="#generateReservationReport"/>
+        <Button text="Generate Donation Report" onAction="#generateDonationReport"/>
+        <Button text="Generate Blood Type Report" onAction="#generateBloodTypeReport"/>
+        <TableView fx:id="demandedonTable">
+            <columns>
+                <TableColumn fx:id="colIdDemande" text="ID Demande" />
+                <TableColumn fx:id="colIdDonateur" text="ID Donateur" />
+                <!-- Add more TableColumn elements for other fields in Demandededon -->
+            </columns>
+        </TableView>
+        <TableView fx:id="reservationTable">
+            <columns>
+                <TableColumn fx:id="colIdReservation" text="ID Reservation" />
+                <TableColumn fx:id="colIdDemande" text="ID Demande" />
+                <!-- Add more TableColumn elements for other fields in Reservation -->
+            </columns>
+        </TableView>
+        <TableView fx:id="donationReportTable">
+            <columns>
+                <TableColumn fx:id="colDate" text="Date" />
+                <TableColumn fx:id="colDonationCount" text="Donation Count" />
+                <!-- Add more TableColumn elements for other fields in DonationReport -->
+            </columns>
+        </TableView>
+        <TableView fx:id="bloodTypeReportTable">
+            <columns>
+                <TableColumn fx:id="colBloodType" text="Blood Type" />
+                <TableColumn fx:id="colCount" text="Count" />
+                <!-- Add more TableColumn elements for other fields in BloodTypeReport -->
+            </columns>
+        </TableView>
+    </VBox>
+
+</AnchorPane>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="707.0" prefWidth="1053.0" styleClass="form_container" stylesheets="@../CSS/Styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hemotransfert.hemotransfert.ReservationController">
+    <children>
+        <VBox layoutX="14.0" layoutY="74.0" prefHeight="471.0" prefWidth="392.0" spacing="15.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="74.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Reservation" />
+                <DatePicker fx:id="tDateReservation" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heure Reservation" />
+                <TextField fx:id="tHeureReservation" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité Réservée" />
+                <TextField fx:id="tQuantiteReservee" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commentaire" />
+                <TextField fx:id="tCommentaire" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type Case" />
+                <TextField fx:id="tTypeCase" />
+            </children>
+        </VBox>
+        <TableView fx:id="table" layoutX="467.0" layoutY="162.0" onMouseClicked="#getData" prefHeight="376.0" prefWidth="562.0" AnchorPane.rightAnchor="21.0">
+            <columns>
+                <TableColumn fx:id="colDateReservation" prefWidth="110.00001525878906" text="Date Reservation" />
+                <TableColumn fx:id="colHeureReservation" prefWidth="122.79998779296875" text="Heure Reservation" />
+                <TableColumn fx:id="colQuantiteReservee" prefWidth="131.5999755859375" text="Quantité Réservée" />
+                <TableColumn fx:id="colCommentaire" prefWidth="103.5999755859375" text="Commentaire" />
+                <TableColumn fx:id="colTypeCase" prefWidth="94.7999267578125" text="Type Case" />
+            </columns>
+        </TableView>
+        <Label alignment="CENTER" layoutX="381.0" layoutY="25.0" prefHeight="36.0" prefWidth="250.0" styleClass="title" text="Reservation" />
+        <ButtonBar layoutX="467.0" layoutY="627.0" prefHeight="40.0" prefWidth="371.0">
+            <buttons>
+                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#creatReservation" text="Save" />
+                <Button fx:id="btnUpdate" layoutX="499.0" layoutY="18.0" mnemonicParsing="false" onAction="#updateReservation" text="Update" />
+                <Button fx:id="btnDelete" layoutX="414.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteReservation" text="Delete" />
+                <Button fx:id="btnClear" layoutX="328.0" layoutY="18.0" mnemonicParsing="false" onAction="#clearField" text="Clear" />
+            </buttons>
+        </ButtonBar>
+    </children>
+</AnchorPane>
