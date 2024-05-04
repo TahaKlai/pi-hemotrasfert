@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1315.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.VolunteerProfileController">
+    <children>
+        <ImageView fitHeight="768.0" fitWidth="1315.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/background.png" />
+            </image>
+        </ImageView>
+        <Pane prefHeight="80.0" prefWidth="1315.0" styleClass="pane" />
+        <Pane layoutY="80.0" prefHeight="689.0" prefWidth="166.0" styleClass="pane">
+            <children>
+                <VBox layoutX="7.0" layoutY="5.0">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#gotoactualite" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Actualite">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-users-60.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#gotocommentaire" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Commentaire">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-event-50.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#Showcompany" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Company">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Images/icons8_Box_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#Showvolunteer" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Volunteer">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Images/icons8_Person_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#gotoStock" prefHeight="46.0" prefWidth="152.0" styleClass="btn">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-marketplace-50.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="152.0" styleClass="btn">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-teach-60.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+                <Button layoutX="20.0" layoutY="638.0" mnemonicParsing="false" onAction="#Deconnection" prefHeight="38.0" prefWidth="124.0" styleClass="btn" text="Quit">
+                    <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/icons8-logout-50.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font name="Roboto Regular" size="16.0" />
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+        <TabPane fx:id="usertp" layoutX="166.0" layoutY="80.0" prefHeight="689.0" prefWidth="1149.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="29.0">
+            <tabs>
+                <Tab fx:id="gusertab">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" stylesheets="@style.css">
+                                    <TextField fx:id="volunteerNameTextField" layoutX="145.0" layoutY="106.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="60.0" layoutY="111.0" text="Name" textFill="#322f2f" />
+
+                                    <TextField fx:id="volunteerAddressTextField" layoutX="145.0" layoutY="156.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="54.0" layoutY="161.0" text="Address" textFill="#322f2f" />
+
+                                    <TextField fx:id="volunteerPhoneTextField" layoutX="145.0" layoutY="206.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="48.0" layoutY="211.0" text="Phone" textFill="#322f2f" />
+
+                                    <TextField fx:id="volunteerEmailTextField" layoutX="145.0" layoutY="256.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="43.0" layoutY="261.0" prefHeight="17.0" prefWidth="67.0" text="   Mail" textFill="#322f2f" />
+
+                                    <ChoiceBox fx:id="volunteerAvailabilityComboBox" layoutX="145.0" layoutY="306.0" prefHeight="35.0" prefWidth="150.0">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Available" />
+                                                <String fx:value="Not Available" />
+                                            </FXCollections>
+                                        </items>
+                                        <cursor>
+                                            <Cursor fx:constant="SE_RESIZE" />
+                                        </cursor>
+                                    </ChoiceBox>
+                                    <Label layoutX="43.0" layoutY="311.0" text="Availability" textFill="#322f2f" />
+
+                                    <TextField fx:id="volunteerProfessionTextField" layoutX="145.0" layoutY="356.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="44.0" layoutY="361.0" text="Profession" textFill="#322f2f" />
+
+                                    <Button fx:id="saveButton" layoutX="193.0" layoutY="455.0" mnemonicParsing="false" onAction="#addVolunteer" prefHeight="47.0" prefWidth="246.0" styleClass="btn" text="Save Changes" />
+
+                                    <ButtonBar prefHeight="40.0" prefWidth="238.0">
+                                        <buttons>
+                                            <ImageView fitHeight="23.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@Images/icons8_Slider__32px.png" />
+                                                </image>
+                                            </ImageView>
+                                            <Button fx:id="Showvolunteers" mnemonicParsing="false" onAction="#Showvolunteers" prefHeight="63.0" prefWidth="157.0" styleClass="btn" text="Show Volunteers" />
+                                        </buttons>
+
+                                    </ButtonBar>
+
+                                    <Label layoutX="48.0" layoutY="418.0" prefHeight="17.0" prefWidth="91.0" text="Companies" textFill="#322f2f" />
+                                    <ChoiceBox fx:id="companies" layoutX="145.0" layoutY="401.0" onShowing="#CompanyNames" prefHeight="35.0" prefWidth="150.0" />
+                                </Pane>
+                            </children>
+
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

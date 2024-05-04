@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1315.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CompanyProfileController">
+    <children>
+        <ImageView fitHeight="768.0" fitWidth="1315.0" opacity="0.58" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/background.png" />
+            </image>
+        </ImageView>
+        <Pane prefHeight="80.0" prefWidth="1315.0" styleClass="pane" />
+        <Pane layoutY="80.0" prefHeight="689.0" prefWidth="166.0" styleClass="pane">
+            <children>
+                <VBox layoutX="7.0" layoutY="5.0">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#gotoactualite" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Actualite">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-users-60.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#gotocommentaire" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Commentaire">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-event-50.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#Showcompany" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Company">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Images/icons8_Box_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#Showvolunteer" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Volunteer">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Images/icons8_Person_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#gotoStock" prefHeight="46.0" prefWidth="152.0" styleClass="btn" text="Stock">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-marketplace-50.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Separator prefHeight="4.0" prefWidth="100.0" />
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="152.0" styleClass="btn">
+                            <graphic>
+                                <ImageView fitHeight="47.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@assets/icons8-teach-60.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="Roboto Regular" size="16.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+                <Button layoutX="20.0" layoutY="638.0" mnemonicParsing="false" onAction="#Deconnection" prefHeight="38.0" prefWidth="124.0" styleClass="btn" text="Quit">
+                    <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/icons8-logout-50.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font name="Roboto Regular" size="16.0" />
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+        <TabPane fx:id="usertp" layoutX="166.0" layoutY="80.0" prefHeight="689.0" prefWidth="1149.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="29.0">
+            <tabs>
+                <Tab fx:id="gusertab">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" stylesheets="@style.css">
+                                    <Label layoutX="31.0" layoutY="115.0" text="Company Name" textFill="#322f2f" />
+                                    <TextField fx:id="companyNameField" layoutX="145.0" layoutY="106.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="51.0" layoutY="163.0" text="Country" textFill="#322f2f" />
+                                    <TextField fx:id="countryField" layoutX="145.0" layoutY="154.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="53.0" layoutY="210.0" text="Website" textFill="#322f2f" />
+                                    <TextField fx:id="websiteField" layoutX="145.0" layoutY="201.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="61.0" layoutY="255.0" text="Email" textFill="#322f2f" />
+                                    <TextField fx:id="emailField" layoutX="145.0" layoutY="246.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="58.0" layoutY="305.0" text="Phone" textFill="#322f2f" />
+                                    <TextField fx:id="phoneField" layoutX="145.0" layoutY="296.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="51.0" layoutY="353.0" text="Address" textFill="#322f2f" />
+                                    <TextField fx:id="addressField" layoutX="145.0" layoutY="344.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Label layoutX="45.0" layoutY="406.0" text="Description" textFill="#322f2f" />
+                                    <TextField fx:id="descriptionField" layoutX="145.0" layoutY="389.0" prefHeight="35.0" prefWidth="294.0" />
+                                    <Button fx:id="saveButton" layoutX="193.0" layoutY="463.0" mnemonicParsing="false" onAction="#addCompany" prefHeight="47.0" prefWidth="246.0" styleClass="btn" text="Save Changes" />
+                                    <ButtonBar layoutX="16.0" layoutY="34.0" prefHeight="47.0" prefWidth="231.0">
+                                        <buttons>
+                                            <ImageView fitHeight="23.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@Images/icons8_Slider__32px.png" />
+                                                </image>
+                                            </ImageView>
+                                            <Button fx:id="showcompaniesb" mnemonicParsing="false" onAction="#Showcompanies" prefHeight="36.0" prefWidth="159.0" styleClass="btn" text="Show companies" />
+                                        </buttons>
+                                    </ButtonBar>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+
+        </TabPane>
+    </children>
+</AnchorPane>
