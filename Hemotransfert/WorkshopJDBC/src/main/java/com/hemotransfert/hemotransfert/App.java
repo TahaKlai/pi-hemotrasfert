@@ -18,20 +18,22 @@ public class App extends Application {
         demandededonStage.show();
 
         // Load Reservation
-        Parent reservationParent = FXMLLoader.load(getClass().getResource("/Fxml/Reservation.fxml"));
+       /* Parent reservationParent = FXMLLoader.load(getClass().getResource("/Fxml/Reservation.fxml"));
         Scene reservationScene = new Scene(reservationParent);
         Stage reservationStage = new Stage();
         reservationStage.setTitle("Hemotransfert - Reservation");
         reservationStage.setScene(reservationScene);
-        reservationStage.show();
+        reservationStage.show();*/
 
         // Load ReportService
-        /* Parent reportServiceParent = FXMLLoader.load(getClass().getResource("/Fxml/ReportService.fxml"));
+       /* Parent reportServiceParent = FXMLLoader.load(getClass().getResource("/Fxml/ReportService.fxml"));
         Scene reportServiceScene = new Scene(reportServiceParent);
         Stage reportServiceStage = new Stage();
         reportServiceStage.setTitle("Hemotransfert - ReportService");
         reportServiceStage.setScene(reportServiceScene);
-        reportServiceStage.show(); */
+        reportServiceStage.show();*/
+
+
         testWordAPI();
     }
 

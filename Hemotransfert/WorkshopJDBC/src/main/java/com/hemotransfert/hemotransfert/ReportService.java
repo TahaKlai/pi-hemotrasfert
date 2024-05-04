@@ -1,97 +1,59 @@
 package com.hemotransfert.hemotransfert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ReportService {
-    Connection con = null;
-    PreparedStatement st = null;
-    ResultSet rs = null;
+    private final DemandededonRepository demandededonRepository;
 
-    public List<Demandededon> generateDemandededonReport() {
-        List<Demandededon> report = new ArrayList<>();
-        String query = "SELECT * FROM demandededons";
-        con = DBConnection.getCon();
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                Demandededon demandededon = new Demandededon();
-                demandededon.setIdDemande(rs.getInt("idDemande"));
-                demandededon.setDateDemande(rs.getDate("dateDemande").toLocalDate());
-                demandededon.setTypeDon(rs.getString("typeDon"));
-                demandededon.setQuantiteDemande(rs.getInt("quantiteDemande"));
-                demandededon.setStatusDemande(rs.getString("statusDemande"));
-                report.add(demandededon);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public ReportService(DemandededonRepository demandededonRepository) {
+        this.demandededonRepository = demandededonRepository;
+    }
+
+    public Map<String, Object> generateReport() {
+        List<Demandededon> demandededons = demandededonRepository.findAll();
+
+        Map<String, Object> report = new HashMap<>();
+        report.put("total_demandededon", demandededons.size());
+        report.put("dons_par_date", calculateDonsByDate(demandededons));
+        report.put("repartition_type_don", calculateDonTypeDistribution(demandededons));
+        report.put("quantite_demande", calculateTotalDemandQuantity(demandededons));
+        report.put("status_demande", calculateDemandStatus(demandededons));
+
         return report;
     }
 
-    public List<Reservation> generateReservationReport() {
-        List<Reservation> report = new ArrayList<>();
-        String query = "SELECT * FROM Reservation";
-        con = DBConnection.getCon();
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                Reservation reservation = new Reservation();
-                reservation.setIdReservation(rs.getInt("idReservation"));
-                reservation.setDateReservation(rs.getDate("dateReservation").toLocalDate());
-                reservation.setHeureReservation(rs.getTime("heureReservation").toLocalTime());
-                reservation.setQuantiteReservee(rs.getInt("quantiteReservee"));
-                reservation.setCommentaire(rs.getString("commentaire"));
-                reservation.setTypeCase(rs.getString("typeCase"));
-                report.add(reservation);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    private Map<String, Integer> calculateDonsByDate(List<Demandededon> demandededons) {
+        Map<String, Integer> donsByDate = new HashMap<>();
+        for (Demandededon demandededon : demandededons) {
+            String date = demandededon.getDateDemande().toString();
+            donsByDate.put(date, donsByDate.getOrDefault(date, 0) + 1);
         }
-        return report;
+        return donsByDate;
     }
 
-    public List<DonationReport> generateDonationReport() {
-        List<DonationReport> report = new ArrayList<>();
-        String query = "SELECT dateDemande, COUNT(*) as donationCount FROM demandededons WHERE statusDemande = 'Confirmée' GROUP BY dateDemande";
-        con = DBConnection.getCon();
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                DonationReport donationReport = new DonationReport();
-                donationReport.setDate(rs.getDate("dateDemande").toLocalDate());
-                donationReport.setDonationCount(rs.getInt("donationCount"));
-                report.add(donationReport);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    private Map<String, Integer> calculateDonTypeDistribution(List<Demandededon> demandededons) {
+        Map<String, Integer> donTypeDistribution = new HashMap<>();
+        for (Demandededon demandededon : demandededons) {
+            String typeDon = demandededon.getTypeDon();
+            donTypeDistribution.put(typeDon, donTypeDistribution.getOrDefault(typeDon, 0) + 1);
         }
-        return report;
+        return donTypeDistribution;
     }
 
-    public List<BloodTypeReport> generateBloodTypeReport() {
-        List<BloodTypeReport> report = new ArrayList<>();
-        String query = "SELECT typeDon, COUNT(*) as count FROM demandededons WHERE statusDemande = 'Confirmée' GROUP BY typeDon";
-        con = DBConnection.getCon();
-        try {
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            while (rs.next()) {
-                BloodTypeReport bloodTypeReport = new BloodTypeReport();
-                bloodTypeReport.setBloodType(rs.getString("typeDon"));
-                bloodTypeReport.setCount(rs.getInt("count"));
-                report.add(bloodTypeReport);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    private int calculateTotalDemandQuantity(List<Demandededon> demandededons) {
+        int totalDemandQuantity = 0;
+        for (Demandededon demandededon : demandededons) {
+            totalDemandQuantity += demandededon.getQuantiteDemande();
         }
-        return report;
+        return totalDemandQuantity;
+    }
+
+    private Map<String, Integer> calculateDemandStatus(List<Demandededon> demandededons) {
+        Map<String, Integer> demandStatus = new HashMap<>();
+        for (Demandededon demandededon : demandededons) {
+            String status = demandededon.getStatusDemande();
+            demandStatus.put(status, demandStatus.getOrDefault(status, 0) + 1);
+        }
+        return demandStatus;
     }
 }
