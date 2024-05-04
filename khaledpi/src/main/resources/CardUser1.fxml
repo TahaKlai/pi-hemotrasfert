@@ -36,6 +36,7 @@
                   <Font name="Roboto Bold" size="18.0" />
                </font>
             </Label>
+
             <Label fx:id="carddate" prefHeight="40.0" prefWidth="296.0" text="Date" GridPane.rowIndex="1">
                <font>
                   <Font name="Roboto Bold" size="14.0" />

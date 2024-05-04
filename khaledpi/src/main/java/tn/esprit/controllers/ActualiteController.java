@@ -2,6 +2,7 @@ package tn.esprit.controllers;
 
 
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
@@ -23,20 +24,36 @@ import tn.esprit.models.Actualite;
 import tn.esprit.models.Commentaire;
 import tn.esprit.services.ServiceActualite;
 import tn.esprit.services.ServiceCommentaire;
+import tn.esprit.utils.EmailSender;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Table;
+
 public class ActualiteController {
     @FXML
     private GridPane userContainer;
+    @FXML
+    private TextField searchField;
     @FXML
     public TextField titretf;
     @FXML
@@ -94,8 +111,11 @@ public class ActualiteController {
 
         // Si tous les champs sont valides, procéder à l'ajout des données
         ActualiteS.Add(new Actualite(THEME, DATE, PRIORITE, CATEGORIE));
+        EmailSender.sendConfirmationEmail("khaledcheour555@gmail.com","","");
         uinfolabel.setText("Ajout Effectue");
     }
+
+
 
 
     private void showAlert(String message) {
@@ -149,25 +169,29 @@ public class ActualiteController {
             e.printStackTrace();
         }
     }
+
     @FXML
     void RechercheNom(ActionEvent event) {
         int column = 0;
         int row = 1;
-        String recherche = usersearch.getText();
+        String recherche = usersearch.getText().toLowerCase(); // Convertir en minuscules pour la recherche insensible à la casse
         try {
             userContainer.getChildren().clear();
-            for (Actualite actualite : ActualiteS.Rechreche(recherche)){
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/CardUser1.fxml"));
-                Pane userBox = fxmlLoader.load();
-                CardUserrController cardC = fxmlLoader.getController();
-                cardC.setData(actualite);
-                if (column == 3) {
-                    column = 0;
-                    ++row;
+            for (Actualite actualite : ActualiteS.Rechreche(recherche)) { // Suppose que ActualiteS.getAllActualites() retourne toutes les actualités
+                // Vérifier si le titre de l'actualité contient la chaîne de recherche
+                if (actualite.getTitre().toLowerCase().contains(recherche)) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/CardUser1.fxml"));
+                    Pane userBox = fxmlLoader.load();
+                    CardUserrController cardC = fxmlLoader.getController();
+                    cardC.setData(actualite);
+                    if (column == 3) {
+                        column = 0;
+                        ++row;
+                    }
+                    userContainer.add(userBox, column++, row);
+                    GridPane.setMargin(userBox, new Insets(10));
                 }
-                userContainer.add(userBox, column++, row);
-                GridPane.setMargin(userBox, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -203,39 +227,80 @@ public class ActualiteController {
 
     @FXML
     void extract(ActionEvent event) {
-        try {
+
             generatePDF();
-        } catch (FileNotFoundException e) {
+
+
+    }
+
+
+    public void generatePDF() {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            String logoPath = "target/classes/assets/waves.png"; // Provide the path to your logo image
+            document.addPage(page);
+
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                int margin = 60;
+                int startY = 700;
+                int leading = 20;
+
+                // Titre du document
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 24);
+                contentStream.newLineAtOffset(margin, startY);
+                contentStream.showText("Rapport d'Actualités");
+                contentStream.endText();
+
+                startY -= 2 * leading;
+
+                // Informations de base
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
+                contentStream.newLineAtOffset(margin, startY);
+                contentStream.showText("Informations Générales :");
+                contentStream.endText();
+                contentStream.beginText();
+                contentStream.newLine();
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.setLeading(leading);
+                contentStream.newLineAtOffset(margin, startY - leading);
+                int i=1;
+
+                for (Actualite actualite : ActualiteS.afficher()) {
+                    contentStream.newLine();
+                    contentStream.showText("actualite:"+ i++);
+                    contentStream.newLine();
+
+                    contentStream.showText("Actualite a la Date:        " + actualite.getDate());
+                    contentStream.newLine();
+
+                    contentStream.newLine();
+                }
+                contentStream.endText();
+
+                startY -= 5 * leading;
+
+                // Informations supplémentaires
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
+                contentStream.newLineAtOffset(margin, startY);
+                contentStream.showText("");
+                contentStream.endText();
+
+                // Vous pouvez continuer à ajouter des informations ici si nécessaire
+
+            }
+
+            document.save("Actualités.pdf");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    private void generatePDF() throws FileNotFoundException {
-        // Get the path to the Downloads directory
-        String downloadsDir = System.getProperty("user.home") + "/Downloads/";
-
-        // Create a PDF file in the Downloads directory
-        File file = new File(downloadsDir + "Actualites.pdf");
-        PdfWriter writer = new PdfWriter(file);
-        PdfDocument pdf = new PdfDocument(writer);
-
-        // Create a document
-        Document document = new Document(pdf);
-
-        // Add content to the document
-        for (Actualite actualite : ActualiteS.afficher()) {
-            document.add(new Paragraph("titre:       " + actualite.getTitre()));
-            document.add(new Paragraph("date:    " + actualite.getDate()));
-            document.add(new Paragraph("priorite:       " + actualite.getPriorite()));
-            document.add(new Paragraph("categorie:    " + actualite.getCategorie()));
 
 
-            document.add(new Paragraph("\n")); // Add a blank line between users
-        }
-        // Close the document
-        document.close();
 
-        System.out.println("PDF file generated successfully at: " + file.getAbsolutePath());
-    }
+
     @FXML
     void gotocommentaire(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gestionAbon.fxml"));
@@ -251,3 +316,4 @@ public class ActualiteController {
     }
 
 }
+

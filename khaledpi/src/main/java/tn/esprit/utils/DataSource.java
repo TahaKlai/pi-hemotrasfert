@@ -8,7 +8,7 @@ public class DataSource {
 
     private  Connection cnx;
     private  Connection conn;
-    private  String url="jdbc:mysql://localhost:3306/khaled";
+    private  String url="jdbc:mysql://localhost:3306/4";
     private  String login="root";
     private  String pwd="";
     private static DataSource instance;

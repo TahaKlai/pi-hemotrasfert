@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import com.itextpdf.kernel.exceptions.PdfException;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -186,27 +187,33 @@ public class CommentaireController {
     }
     private void generatePDF() throws FileNotFoundException {
         // Get the path to the Downloads directory
-        String downloadsDir = System.getProperty("user.home") + "/Downloads/";
 
-        // Create a PDF file in the Downloads directory
-        File file = new File(downloadsDir + "Commentaires.pdf");
-        PdfWriter writer = new PdfWriter(file);
-        PdfDocument pdf = new PdfDocument(writer);
+        try {
+            String downloadsDir = System.getProperty("user.home") + "/Downloads/";
 
-        // Create a document
-        Document document = new Document(pdf);
+            // Create a PDF file in the Downloads directory
+            File file = new File(downloadsDir + "Commentaires.pdf");
+            PdfWriter writer = new PdfWriter(file);
+            PdfDocument pdf = new PdfDocument(writer);
 
-        // Add content to the document
-        for (Commentaire commentaire : CommentaireS.afficher()) {
-            document.add(new Paragraph("Theme:       " + commentaire.getTheme()));
-            document.add(new Paragraph("description:    " + commentaire.getDescription()));
+            // Create a document
+            Document document = new Document(pdf);
 
-            document.add(new Paragraph("\n")); // Add a blank line between users
+            // Add content to the document
+            for (Commentaire commentaire : CommentaireS.afficher()) {
+                document.add(new Paragraph("Theme:       " + commentaire.getTheme()));
+                document.add(new Paragraph("description:    " + commentaire.getDescription()));
+
+                document.add(new Paragraph("\n")); // Add a blank line between users
+            }
+            // Close the document
+            document.close();
+
+            System.out.println("PDF file generated successfully at: " + file.getAbsolutePath());
         }
-        // Close the document
-        document.close();
-
-        System.out.println("PDF file generated successfully at: " + file.getAbsolutePath());
+        catch (PdfException e) {
+        e.printStackTrace();
+        }
     }
     @FXML
     void gotoactualite(ActionEvent event) {

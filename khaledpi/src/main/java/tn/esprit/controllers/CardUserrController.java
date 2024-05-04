@@ -83,6 +83,8 @@ public class CardUserrController {
             e.printStackTrace();
         }
     }
+
+
     public void suppuser(ActionEvent actionEvent) throws IOException {
         ActualiteS.DeleteByID(uid);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionCat.fxml"));
